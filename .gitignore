@@ -96,3 +96,8 @@ ENV/
 
 # mkdocs documentation
 /site
+
+# vim
+.py~
+.un~
+.swp

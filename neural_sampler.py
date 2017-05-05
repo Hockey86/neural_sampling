@@ -7,9 +7,9 @@ from sklearn.utils import check_array, check_X_y, check_random_state
 #import pymc3 as pm
 
 
-class NeuralSampler(object):
+class HMCSampler(object):
     """
-    NeuralSampler(log_upost, n_draw=1000, n_iter=100, n_chain=1, random_state=None)
+    HMCSampler(log_upost, n_draw=1000, n_iter=100, n_chain=1, random_state=None)
     dtheta_log_upost: a function to compute the log of (unnormalized) posterior: log[P(D|theta)P(theta)]
     n_draw: number of samples drawn
     n_iter: number of leapfrog steps in Hamiltonian dynamics
@@ -82,3 +82,13 @@ class NeuralSampler(object):
         
         return self.thetas
 
+
+
+class NeuralSampler(object):
+    """
+    NeuralSampler()
+    """
+    def __init__(self):
+        self.
+        
+    def sample(self, X, y=None):

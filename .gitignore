@@ -98,6 +98,5 @@ ENV/
 /site
 
 # vim
-.py~
-.un~
-.swp
+*~
+*.swp

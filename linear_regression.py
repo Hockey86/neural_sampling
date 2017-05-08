@@ -54,7 +54,7 @@ class BayesianLinearRegression(BaseEstimator, RegressorMixin):
         self.D = X_.shape[1]
         self.two_sigma2_y = 2.*self.sigma2_y
         self.two_sigma2_W = 2.*self.sigma2_W
-                
+
         self.Ws = self.sampler.sample(X_,y)
         self.Ws = self.Ws[-int(round(self.keep_sampling*len(self.Ws))):]
         
@@ -99,7 +99,12 @@ if __name__=='__main__':
                 keep_sampling=1., random_state=random_state)
     
     lr_hmc.fit(X, y)
+    lr_neural.fit(X, y)
     
     plt.plot(np.array(lr_hmc.Ws))
+    plt.plot(np.array(lr_neural.Ws))
+    
+    sb.despine()
+    plt.tight_layout()
     plt.show()
 

@@ -185,6 +185,7 @@ class BayesianLinearRegressionNS(BayesianLinearRegressionHMC):
         #return np.dot(A,W)+B
         #return np.dot(A, spikes.mean(axis=0)) + B
         return np.dot(A, np.arctanh(np.clip(spikes.mean(axis=0),1e-10-1,1-1e-10))) + B
+        #return np.dot(A, np.arctanh(np.clip(np.tanh(W),1e-10-1,1-1e-10))) + B
             
     def _log_post(self, W, X, y):
         """
@@ -243,21 +244,20 @@ if __name__=='__main__':
     
     random_state = 2
     np.random.seed(random_state)
-    sigma2_y = 0.01
+    sigma2_y = 0.1
     sigma2_W = 1.
     
     # generate data
     
-    N = 100
+    N = 50
     D = 3
     W = np.zeros(D)+[2.,1.,3.]
     X = np.random.rand(N,D)
     y = np.dot(X,W)+np.random.randn(N)*np.sqrt(sigma2_y)
     
-    #pdb.set_trace()
     lr_neural = BayesianLinearRegressionNS(sigma2_y=sigma2_y, sigma2_W=sigma2_W,
-                fit_intercept=False, tau=1000., n_draw=200, n_iter=100,
-                n_chain=1, compute_H=True, keep_sampling=0.5,
+                fit_intercept=False, tau=100., n_draw=1000, n_iter=10,
+                n_chain=1, pair_n_conn=1000, compute_H=True, keep_sampling=0.5,
                 random_state=random_state).fit(X, y)
     
     #lr_hmc = BayesianLinearRegressionHMC(sigma2_y=sigma2_y, sigma2_W=sigma2_W,
